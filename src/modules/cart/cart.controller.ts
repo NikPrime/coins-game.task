@@ -6,6 +6,8 @@ import { AddProductToCartOutputDto } from './dto/add-product-to-cart-output.dto'
 import { GetCartProductsOutputDto } from './dto/get-cart-products-output.dto';
 import { UpdateCartProductQuantityInputDto } from './dto/update-cart-product-quantity-input.dto';
 import { UpdateCartProductQuantityOutputDto } from './dto/update-cart-product-quantity-output.dto';
+import { GetAllCartsProductsOutputDto } from './dto/get-all-carts-products-output.dto';
+
 @ApiTags('Cart')
 @Controller('cart')
 export class CartController {
@@ -31,7 +33,7 @@ export class CartController {
     @ApiResponse({
         status: 200,
         description: 'Get all carts products success',
-        type: [GetCartProductsOutputDto],
+        type: [GetAllCartsProductsOutputDto],
     })
     @Get()
     async getAllCartsProducts() {

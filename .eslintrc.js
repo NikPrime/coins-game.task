@@ -27,7 +27,7 @@ module.exports = {
   ],
   rules: {
     'prettier/prettier': ['warn', prettierOptions],
-    'max-len': ['warn', { code: 120 }],
+    'max-len': ['warn', { code: 130 }],
 
     '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',

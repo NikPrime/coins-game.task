@@ -24,21 +24,28 @@ export class CartService {
         }
     }
 
-    async getAllCartsProducts(): Promise<GetAllCartsProductsOutputDto[]> {
+    async getAllCartsProducts() {
         try {
             const cartsProducts = await this.cartRepository.getAllCartsProducts();
 
-            return cartsProducts.map((cartProducts) => plainToClass(GetAllCartsProductsOutputDto, cartProducts));
+            const grouped = cartsProducts.reduce((acc, item) => {
+                if (!acc[item.userId]) {
+                    acc[item.userId] = { userId: item.userId, products: [] };
+                }
+                acc[item.userId].products.push({
+                    product: item.product,
+                    quantity: item.quantity,
+                });
+                return acc;
+            }, {});
+
+            return Object.values(grouped).map((cartProducts) => plainToClass(GetAllCartsProductsOutputDto, cartProducts));
         } catch (error) {
             throw new InternalServerErrorException(error);
         }
     }
 
-    async addProductToCart(
-        userId: string,
-        productId: string,
-        addProductToCartInput: AddProductToCartInputDto,
-    ): Promise<AddProductToCartOutputDto> {
+    async addProductToCart(userId: string, productId: string, addProductToCartInput: AddProductToCartInputDto): Promise<AddProductToCartOutputDto> {
         try {
             const { quantity } = addProductToCartInput;
             const addedProductToCart = await this.cartRepository.addProductToCart(productId, userId, quantity);

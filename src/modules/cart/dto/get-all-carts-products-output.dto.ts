@@ -1,12 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsUUID } from 'class-validator';
-import { GetCartProductsOutputDto } from './get-cart-products-output.dto';
+import { ProductDto } from '../../product/dto/product.dto';
 
 export class GetAllCartsProductsOutputDto {
     @ApiProperty()
     @IsUUID()
     userId: string;
 
-    @ApiProperty({ type: [GetCartProductsOutputDto] })
-    cartProducts: GetCartProductsOutputDto[];
+    @ApiProperty({ type: [ProductDto] })
+    products: ProductDto[];
 }
