@@ -18,16 +18,16 @@ CREATE TABLE "products" (
 
 -- CreateTable
 CREATE TABLE "cart_items" (
-    "id" TEXT NOT NULL,
     "quantity" INTEGER NOT NULL,
     "userId" TEXT NOT NULL,
-    "productId" TEXT NOT NULL,
-
-    CONSTRAINT "cart_items_pkey" PRIMARY KEY ("id")
+    "productId" TEXT NOT NULL
 );
 
 -- CreateIndex
 CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "cart_items_userId_productId_key" ON "cart_items"("userId", "productId");
 
 -- AddForeignKey
 ALTER TABLE "cart_items" ADD CONSTRAINT "cart_items_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
