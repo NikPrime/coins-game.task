@@ -28,6 +28,20 @@ export class ProductController {
     }
 
     @ApiOperation({
+        operationId: 'getAllProducts',
+        summary: 'get all products',
+    })
+    @ApiResponse({
+        status: 200,
+        description: 'Get all products success',
+        type: [GetProductOutputDto],
+    })
+    @Get()
+    async getAllProducts() {
+        return this.productService.getAllProducts();
+    }
+
+    @ApiOperation({
         operationId: 'createProduct',
         summary: 'create product',
     })

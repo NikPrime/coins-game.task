@@ -7,6 +7,7 @@ import { AddProductToCartOutputDto } from './dto/add-product-to-cart-output.dto'
 import { UpdateCartProductQuantityInputDto } from './dto/update-cart-product-quantity-input.dto';
 import { GetCartProductsOutputDto } from './dto/get-cart-products-output.dto';
 import { UpdateCartProductQuantityOutputDto } from './dto/update-cart-product-quantity-output.dto';
+import { GetAllCartsProductsOutputDto } from './dto/get-all-carts-products-output.dto';
 
 @Injectable()
 export class CartService {
@@ -18,6 +19,16 @@ export class CartService {
             if (!cartProducts) throw new NotFoundException('Cart not found');
 
             return plainToClass(GetCartProductsOutputDto, cartProducts);
+        } catch (error) {
+            throw new InternalServerErrorException(error);
+        }
+    }
+
+    async getAllCartsProducts(): Promise<GetAllCartsProductsOutputDto[]> {
+        try {
+            const cartsProducts = await this.cartRepository.getAllCartsProducts();
+
+            return cartsProducts.map((cartProducts) => plainToClass(GetAllCartsProductsOutputDto, cartProducts));
         } catch (error) {
             throw new InternalServerErrorException(error);
         }

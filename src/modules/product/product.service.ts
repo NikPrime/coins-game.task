@@ -24,6 +24,16 @@ export class ProductService {
         }
     }
 
+    async getAllProducts(): Promise<GetProductOutputDto[]> {
+        try {
+            const existedProducts = await this.productRepository.getAllProducts();
+
+            return existedProducts.map((product) => plainToClass(GetProductOutputDto, product));
+        } catch (error) {
+            throw new InternalServerErrorException(error);
+        }
+    }
+
     async createProduct(product: CreateProductInputDto): Promise<CreateProductOutputDto> {
         try {
             const newUuid = uuidv4();

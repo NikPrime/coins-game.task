@@ -13,6 +13,10 @@ export class UserRepository {
         });
     }
 
+    getAllUsers() {
+        return this.prisma.user.findMany();
+    }
+
     createUser(id: string, user: CreateUserInputDto) {
         return this.prisma.user.create({
             data: {

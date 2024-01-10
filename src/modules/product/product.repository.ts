@@ -12,6 +12,10 @@ export class ProductRepository {
         });
     }
 
+    getAllProducts() {
+        return this.prisma.product.findMany();
+    }
+
     createProduct(id: string, product: CreateProductInputDto) {
         return this.prisma.product.create({
             data: {

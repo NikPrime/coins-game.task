@@ -25,6 +25,16 @@ export class UserService {
         }
     }
 
+    async getAllUsers(): Promise<GetUserOutputDto[]> {
+        try {
+            const existedUsers = await this.userRepository.getAllUsers();
+
+            return existedUsers.map((user) => plainToClass(GetUserOutputDto, user));
+        } catch (error) {
+            throw new InternalServerErrorException(error);
+        }
+    }
+
     async createUser(user: CreateUserInputDto): Promise<CreateUserOutputDto> {
         try {
             const newUuid = uuidv4();

@@ -28,6 +28,20 @@ export class UserController {
     }
 
     @ApiOperation({
+        operationId: 'getAllUsers',
+        summary: 'get all users',
+    })
+    @ApiResponse({
+        status: 200,
+        description: 'Get all users success',
+        type: [GetUserOutputDto],
+    })
+    @Get()
+    async getAllUsers() {
+        return this.userService.getAllUsers();
+    }
+
+    @ApiOperation({
         operationId: 'createUser',
         summary: 'create user',
     })

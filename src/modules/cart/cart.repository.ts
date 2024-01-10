@@ -11,6 +11,12 @@ export class CartRepository {
         });
     }
 
+    getAllCartsProducts() {
+        return this.prisma.cartItem.findMany({
+            include: { product: true },
+        });
+    }
+
     addProductToCart(productId: string, userId: string, quantity: number) {
         return this.prisma.cartItem.create({
             data: {

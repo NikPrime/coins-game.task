@@ -25,6 +25,20 @@ export class CartController {
     }
 
     @ApiOperation({
+        operationId: 'getAllCartsProducts',
+        summary: 'get all carts products',
+    })
+    @ApiResponse({
+        status: 200,
+        description: 'Get all carts products success',
+        type: [GetCartProductsOutputDto],
+    })
+    @Get()
+    async getAllCartsProducts() {
+        return this.cartService.getAllCartsProducts();
+    }
+
+    @ApiOperation({
         operationId: 'addProductToCart',
         summary: 'add product to card by userId and productId',
     })

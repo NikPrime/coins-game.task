@@ -16,5 +16,5 @@ export class GetCartProductsOutputDto {
     productId: string;
 
     @ApiProperty({ type: [ProductDto] })
-    product: ProductDto[];
+    products: ProductDto[];
 }
